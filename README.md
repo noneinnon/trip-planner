@@ -1,36 +1,20 @@
-# trip-planner
+# Trip planner
 
-FIXME: description
+a telegram bot that suppose to help you share your trips with friends and find new routes
 
-## Installation
+## Running in repl
 
-Download from http://example.com/FIXME.
+Make sure that `TELEGRAM_TOKEN` variable is set
 
-## Usage
+- `lein repl` to start a new repl
+- run `trip-planner.dev/-main`
 
-FIXME: explanation
+## Running in a container on a remote VPS
 
-    $ java -jar trip-planner-0.1.0-standalone.jar [args]
+on the server run:
+- `sudo docker run -v db:/usr/src/app/db -e TELEGRAM_TOKEN=<TOKEN> -p 54320:54320 -it trip-planner lein repl :start :host 0.0.0.0 :port 54320`
 
-## Options
+on your local machine:
+- `ssh -R 54320:localhost:54320 <remote-host>`
 
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2023 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+nrepl on port 54320 should now be available on your local machine

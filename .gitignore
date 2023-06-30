@@ -12,3 +12,6 @@ pom.xml.asc
 .calva
 .clj-kondo
 .lsp
+*.sublime-workspace
+db
+.DS_Store
