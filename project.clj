@@ -7,7 +7,10 @@
 
   :dependencies [[org.clojure/clojure "1.10.3"]
                  [environ             "1.1.0"]
-                 [morse               "0.4.3"]
+                 [telegrambot-lib "2.3.0"]
+                 [cheshire "5.10.1"]
+                 [nrepl "1.0.0"]
+                 [com.github.seancorfield/honeysql "2.4.1045"]
                  [commons-io "2.4"]
                  [org.clojure/tools.logging "1.2.4"]
                  [org.clojure/tools.namespace "0.2.3"]
@@ -19,7 +22,7 @@
 
   :aliases {"dev" ["run" "-m" "trip-planner.dev"]}
 
-  :main ^:skip-aot trip-planner.core
+  :main ^:skip-aot trip-planner.main
   :target-path "target/%s"
 
   :profiles {:uberjar {:aot :all}})

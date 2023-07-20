@@ -15,3 +15,5 @@ pom.xml.asc
 *.sublime-workspace
 db
 .DS_Store
+profiles.clj
+.env

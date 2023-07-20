@@ -1,31 +1,30 @@
 (ns trip-planner.dev
   (:require
-   [clojure.tools.namespace.repl :refer [refresh refresh-all]]
-   [morse.polling :as p]
-   [trip-planner.config :refer [token]]
-   [trip-planner.core :refer [handle-request handler]]))
+   [clojure.tools.namespace.repl :refer [refresh-all]]
+   [nrepl.server :refer [start-server]]
+   [trip-planner.config :refer [bot]]
+   [trip-planner.polling :refer [app]]))
 
-(def chan (atom nil))
+(def repl-server (atom nil))
 
-(defn dev
-  []
-  (when @chan
-    (p/stop @chan))
-  (reset! chan (p/start token handler)))
+(def repl-port 54321)
 
-(defn start [] (reset! chan (p/start token handle-request)))
+(defonce running (atom nil))
+
+(defn start []
+  (reset! running (app bot)))
 
 (defn stop []
-  (when @chan (p/stop @chan))
-  (reset! chan nil))
+  (when (future? @running)
+    (future-cancel @running)))
 
 (defn -main []
   (println "stopping bot")
   (stop)
+  (reset! repl-server (start-server :bind "0.0.0.0" :port repl-port))
   (println "starting bot")
-  (refresh :after 'trip-planner.dev/start))
+  (start))
 
 (comment
-  (stop)
   (-main)
   (refresh-all :after 'trip-planner.dev/start))
